@@ -11,8 +11,9 @@ def compute_ranks(graph):
         newranks = {}
         for page in graphA:
             newranks = (1 - d) / npages
-            #update by summing in the inlink ranks
-
+            for node in graph:
+                if page in graph[node]:
+                    newrank = newrank + d * (ranks[node] / len(graph[node]))
         newranks[page] = newrank
     ranks = newranks
     return ranks
